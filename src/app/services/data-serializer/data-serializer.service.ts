@@ -1,4 +1,4 @@
-import  * as DST from '../DataStrConsts'; 
+import  * as DSC from './DataStrConsts'; 
 import { Injectable } from '@angular/core';
 
 @Injectable({
@@ -8,35 +8,37 @@ import { Injectable } from '@angular/core';
  * ChatServer. */
 export class DataSerializerService 
 { 
-     
-
   // Class Constructor used to create a new DataDeserializer 
-  constructor() 
-  { 
+  constructor() {}
 
-  }
-
-  public static deserialize (data:any[]): Map <String, String>
+  /**
+   * Function to deserialize raw data string responses coming back from the 
+   * ChatServer based upon an agreed upon protocol for searializing and 
+   * deserializing command strings.
+   *  
+   * @param data The raw data string response sent back from the ChatServer to 
+   *        be deserialed into an associative Mapping 
+   */
+  public deserialize (data:String): Map <string, string>
   {
       // Local Variable Declaration 
-      let asocArray: Map<String, String>  = new Map<String, String>();
-      let keyVals: String[], entries:String[];
+      let asocArray: Map<string, string>  = new Map<string, string>();
+      let keyVals: string[], entries:string[];
       
-      // Convert the data byte array into a String 
-      let dataString: String  = data.toString().trim();
+      // Trim any whitespace off the data string sent back 
+      let dataString: String  = data.trim();
       
       // Proceed only if the empty string wasn't passed
       if(dataString !== "")
       {        
           // Parse the data string over the expected semicolons
-          entries = dataString.split(DST.ENTRY_DELM);
-          
+          entries = dataString.split(DSC.ENTRY_DELM);          
 
           // Loop through each entry 
           for (let entry of entries) 
           {
               // Parse the entry string over the equals since, spliting key from value
-              keyVals = entry.split(DST.KV_DELM);
+              keyVals = entry.split(DSC.KV_DELM);
 
               // Put the key-value pair in the associative array 
               asocArray.set(keyVals[0], keyVals[1]);

@@ -1,3 +1,5 @@
+// The size of each message, the size of the byte buffer 
+export const BUFF_SIZE = 100; //bytes
 
 // Entrace worke parsing constatns 
 export const LOG_OFF:string = "LOG_OFF";   
