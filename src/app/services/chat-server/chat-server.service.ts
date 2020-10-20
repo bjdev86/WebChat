@@ -51,12 +51,12 @@ export class ChatServerService
           /* Initiate a websocket connection using the given host and port 
            * number */
           this.soc = new WebSocket("ws://" + host + ":" + port);
-
+         
           // Wait for the connection to be opened
           this.soc.onopen = (event:MessageEvent) =>
           {
             /* Once the connection is opened then the promise is resolved */
-             resolve("Connection Established" + event.data.toString());
+             resolve("Connection Established" + event.toString());
           }
         } 
         catch (error) 
